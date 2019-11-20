@@ -14,7 +14,7 @@ public class LoginFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
 
         //Storing URIs
-        String indexURI = req. getContextPath() + "/index.xhtml";
+        String indexURI = req.getContextPath() + "/index.xhtml";
         String loginURI = req.getContextPath() + "/login.xhtml";
         String registerURI = req.getContextPath() + "/register.xhtml";
         String uri = req.getRequestURI();
@@ -37,7 +37,7 @@ public class LoginFilter extends HttpFilter {
 
 
         //NOTE: if you want do do filtering you need to make huge if/else
-        //redirect to login if logged in and request to login or register
+        //redirect to index if logged in and request to login or register
         if(loggedIn && loginRequest || loggedIn && registerRequest){
             res.sendRedirect(indexURI);
         }

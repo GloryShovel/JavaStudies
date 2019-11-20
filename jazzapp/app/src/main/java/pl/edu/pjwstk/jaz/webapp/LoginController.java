@@ -1,5 +1,8 @@
 package pl.edu.pjwstk.jaz.webapp;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.edu.pjwstk.jaz.auth.ProfileEntity;
+import pl.edu.pjwstk.jaz.dbstuff.User;
 import pl.edu.pjwstk.jaz.login.LoginRequest;
 import pl.edu.pjwstk.jaz.login.Register;
 
@@ -7,7 +10,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -16,47 +23,60 @@ public class LoginController {
     private LoginRequest loginRequest;
     @Inject
     private Register register;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     //making references
     private FacesContext context = FacesContext.getCurrentInstance();
 
     public String login() {
+        //passwordEncoder is needed for later compare password from form an DB
+        var passwordEncoder = new BCryptPasswordEncoder();
 
-        //Checking if hashmap contain username
-        if(register.getValue(loginRequest.getUsername()) == null){
-            System.out.println(register.getValue(loginRequest.getUsername()));
+        //DB mapping
+        //makes query to DB and return as list type of User from profile (somehow, probably by type)
+        final User user = entityManager.find(User.class, 7L);
+        var list = entityManager.createQuery("from User where login = :login", User.class)
+                .setParameter("login", loginRequest.getUsername())
+                .getResultList();
+
+        //DEV STUFF
+//        System.out.println(list.get(0).getName());
+
+        //login if list is not empty
+        if(list.isEmpty()){
             return "/login.xhtml";
-        }else{
-
-            //Checking login and password
-            if (register.getValue(loginRequest.getUsername()).equals(loginRequest.getPassword())){
-
+        }else {
+            //Checking password for username
+            if (passwordEncoder.matches(loginRequest.getPassword(), list.get(0).getPswrd())) {
                 //Reference to old session
-                HttpSession oldSession = (HttpSession)context.getExternalContext().getSession(false);
+                HttpSession oldSession = (HttpSession) context.getExternalContext().getSession(false);
 
                 //Destroying old session
-                if(oldSession != null){
+                if (oldSession != null) {
                     oldSession.invalidate();
                 }
 
                 //Creating new session for actualy logged user
-                HttpSession newSession = (HttpSession)context.getExternalContext().getSession(true);
+                HttpSession newSession = (HttpSession) context.getExternalContext().getSession(true);
 
                 //setting attributes for existing session (later just set attribute ID)
                 newSession.setAttribute("username", loginRequest.getUsername());
                 newSession.setAttribute("password", loginRequest.getPassword());
                 //setting lifetime of session for 5min
-                newSession.setMaxInactiveInterval(5*60);
+                newSession.setMaxInactiveInterval(5 * 60);
 
-                //console log for debuging
+                //console log for debugging
                 System.out.println("Loged in");
                 return "/index.xhtml";
-            }else{
-                //console log for debuging
+            } else {
+                //console log for debugging
                 System.out.println("Not Logged in");
                 return "/login.xhtml";
             }
         }
+
+        //DEV STUFF
         //System.out.println("Tried to log in using " + loginRequest.toString());
     }
 

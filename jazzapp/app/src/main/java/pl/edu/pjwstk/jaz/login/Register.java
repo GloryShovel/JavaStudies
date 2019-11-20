@@ -1,8 +1,12 @@
 package pl.edu.pjwstk.jaz.login;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.edu.pjwstk.jaz.dbstuff.User;
+
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.HashMap;
 
 @Named
@@ -17,18 +21,39 @@ public class Register {
 
     private HashMap <String, String> map = new HashMap<>();
 
+    //EntityManager handles all entities
+    @PersistenceContext
+    private EntityManager entityManager;
+
     //Pre existing users
     public Register(){
         map.put("coldy", "123");
     }
 
-    //Registering new users
+    //Registering new users to hash map
+    @Transactional
     public String register(){
-        if(map.containsKey(getUsername())) {
-            return "/register.xhtml";
-        }else{
-            map.put(getUsername(), getPassword());
+        //Encoder
+        var passwordEncoder = new BCryptPasswordEncoder();
+        //Encoding password
+        final String codedPassword = passwordEncoder.encode(getPassword());
+
+        //Mapping DB for login check
+        final User login = entityManager.find(User.class, 7L);
+        var list = entityManager.createQuery("from User where login = :login", User.class)
+                .setParameter("login", getUsername())
+                .getResultList();
+
+        //Checking does DB contains this username
+        if(list.isEmpty()){
+            //Creates new user to store in DB
+            var user = new User(getName(), getSurname(), getUsername(), codedPassword, getEmail(), getBirthday());
+
+            //Persist new user to Hibernate
+            entityManager.persist(user);
             return "/login.xhtml";
+        }else{
+            return "/register.xhtml";
         }
     }
 
