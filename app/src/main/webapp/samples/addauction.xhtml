@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="../templates/Layout.xhtml">
+        <ui:param name="title" value="Edit branch"/>
+
+        <ui:define name="content">
+            <div class="text-center">
+                <h:outputLabel rendered="#{flash.containsKey('error-message')}"
+                               styleClass="alert alert-danger" value="#{flash['error-message']}"/>
+                <h:form styleClass="form-base">
+
+                    <div class="form-group">
+                        <h:outputText value="Wybierz dzial"/><br/>
+                        <h:selectOneMenu id="branch-name" styleClass="form-control" a:placeholder="Branch name"
+                                         value="#{editAuctionController.addRequest.branchId}"
+                                         onchange="submit()"
+                                         valueChangeListener="#{editAuctionController.addRequest.branchIdChange}">
+                            <f:selectItems value="#{listBranchController.branchList}" var="branch"
+                                           itemValue="#{branch.id}" itemLabel="#{branch.name}"/>
+                        </h:selectOneMenu>
+                        <br/>
+                        <h:outputText value="Wybierz kategorie"/><br/>
+                        <h:selectOneMenu id="category-name" styleClass="form-control" a:placeholder="Category name"
+                                         value="#{editAuctionController.addRequest.categoryId}">
+                            <f:selectItems value="#{listCategoryController.getCategoriesOfBranch(editAuctionController.addRequest.branchId)}"
+                                           var="category"
+                                           itemValue="#{category.id}" itemLabel="#{category.name}"/>
+                        </h:selectOneMenu>
+                    </div><br/>
+
+
+                    <h:outputText value="Zdjecia"/><br/>
+                    <div class="form-group">
+                        <h:inputText id="auction-photos" styleClass="form-control" a:placeholder="Auction photos"
+                                     value="#{editAuctionController.addRequest.tempPhoto}"/>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Parametry"/><br/>
+                            <h:inputText id="auction-params" styleClass="form-control" a:placeholder="Auction params"
+                                         value="#{editAuctionController.addRequest.tempParam}"/>
+                            <h:inputText id="auction-properties-value" styleClass="form-control" a:placeholder="Auction params value"
+                                         value="#{editAuctionController.addRequest.tempParamValue}"/>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Tytul"/><br/>
+                        <h:inputText id="auction-titl" styleClass="form-control" a:placeholder="Auction title"
+                                     value="#{editAuctionController.addRequest.title}"/>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Opis"/><br/>
+                        <h:inputText id="auction-description" styleClass="form-control" a:placeholder="Auction description"
+                                     value="#{editAuctionController.addRequest.description}"/>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Cena"/><br/>
+                        <h:inputText id="auction-price" styleClass="form-control" a:placeholder="Auction price"
+                                     value="#{editAuctionController.addRequest.price}"/>
+                    </div><br/>
+
+                    <h:commandButton styleClass="btn btn-primary" value="Save" action="#{editAuctionController.add}"/><br/>
+                </h:form>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html>

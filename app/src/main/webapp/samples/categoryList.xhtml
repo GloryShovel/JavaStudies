@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Allezon</title>
+    <h:outputStylesheet name="main.css" library="css" />
+</h:head>
+
+<h:body>
+    <ui:composition template="../templates/Layout.xhtml">
+
+        <ui:define name="content">
+
+            <div class="link">
+                <a href="/app/indexadmin.xhtml">Back</a>
+            </div>
+            <br/>
+            <div class="link">
+                <a href="/app/samples/addcategory.xhtml">Add new category</a>
+            </div>
+
+            <div class="list-group">
+                <h4>Click to edit category</h4>
+                <ui:repeat value="#{listCategoryController.categoryList}" var="category">
+                    <h:link styleClass="list-group-item list-group-item-action" outcome="editcategory">
+                        <f:param name="categoryId" value="#{category.id}"/>
+
+                        <h:outputText  value="##{category.id} #{category.name} #{category.branch.name}"/>
+                        <br/>
+                    </h:link>
+                </ui:repeat>
+            </div>
+
+        </ui:define>
+
+    </ui:composition>
+</h:body>
+</html>

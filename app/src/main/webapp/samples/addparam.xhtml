@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="../templates/Layout.xhtml">
+        <ui:param name="title" value="Edit branch"/>
+
+        <ui:define name="content">
+            <div class="text-center">
+                <h:outputLabel rendered="#{flash.containsKey('error-message')}"
+                               styleClass="alert alert-danger" value="#{flash['error-message']}"/>
+                <h:form styleClass="form-base">
+
+                    <h:outputText value="Parametry"/><br/>
+                    <div class="form-group">
+                        <h:inputText id="auction-params" styleClass="form-control" a:placeholder="Auction params"
+                                     value="#{editAuctionController.addRequest.tempParam}"/>
+                        <h:inputText id="auction-params-value" styleClass="form-control" a:placeholder="Auction params values"
+                                     value="#{editAuctionController.addRequest.tempParamValue}"/>
+                    </div><br/>
+
+                    <h:commandButton styleClass="btn btn-primary" value="Nastempne zdjecie" action="#{editAuctionController.nextParam}"/><br/>
+                    <h:commandButton styleClass="btn btn-primary" value="Dalej" action="#{editAuctionController.redirectToAddAuction}"/><br/>
+                </h:form>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html>
