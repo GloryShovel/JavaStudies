@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<h:head>
+    <h:outputStylesheet name="main.css" library="css"/>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="templates/Layout.xhtml">
+
+        <ui:define name="header">
+            <div id="specialHeader">
+                <h1><h:outputText value="#{msg['jaz.app.name']}"/></h1>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+            <div id="link">
+                <a href="/app/login.xhtml">Here if you have account</a>
+            </div>
+
+            <div id="registerPage">
+
+                <h:form>
+                    <br/>
+                    Imie:<br/>
+                    <h:inputText id="Imie" value="#{register.name}">
+                        <f:validateLength minimum="3" maximum="50"/>
+                        <f:validateRegex pattern="^[a-zA-Z0-9]{3,50}$"/>
+                    </h:inputText>
+                    <!--<h:message for="Imie"/>-->
+
+                    <br/>
+
+                    Nazwisko:<br/>
+                    <h:inputText id="Nazwisko" value="#{register.surname}">
+                        <f:validateLength minimum="3" maximum="50"/>
+                        <f:validateRegex pattern="^[a-zA-Z0-9]{3,50}$"/>
+                    </h:inputText>
+
+                    <br/>
+                    Nazwa Uzytkownika:<br/>
+                    <h:inputText id="username" value="#{register.username}">
+                        <f:validateLength minimum="3" maximum="50"/>
+                        <f:validateRegex pattern="^[a-z0-9]{3,50}$"/>
+                    </h:inputText>
+                    <br/>
+
+                    Haslo:<br/>
+                    <h:inputSecret id="password" value="#{register.password}">
+                        <f:validateLength minimum="5" maximum="30"/>
+                        <f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,30}$"/>
+                    </h:inputSecret>
+                    <br/>
+
+                    E-mail:<br/>
+                    <h:inputText id="e_mail" value="#{register.email}">
+                        <f:validateLength minimum="3" maximum="50"/>
+                        <f:validateRegex pattern="^[a-zA-Z0-9.!#$%'*+/=?^_`{\}~-]+@[a-zA-z0-9-]+(?:\.[a-zA-Z0-9]+)*$"/>
+                    </h:inputText>
+                    <br/>
+
+                    Data urodzenia:<br/>
+                    <h:inputText id="data_urodzenia" value="#{register.birthday}">
+                        <f:validateLength minimum="3" maximum="50"/>
+                        <f:validateRegex pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$"/>
+                    </h:inputText>
+
+                    <br/>
+                    <h:commandButton value="Register" action="#{(register.register)}"/>
+                </h:form>
+
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</h:body>
+</html>

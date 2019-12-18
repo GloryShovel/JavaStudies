@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<h:head>
+    <h:outputStylesheet name="main.css" library="css"/>
+</h:head>
+
+<h:body>
+    <ui:composition template="templates/Layout.xhtml">
+
+        <ui:define name="header">
+            <div id="specialHeader">
+                <h1><h:outputText value="#{msg['jaz.app.name']}"/></h1>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+
+            <div class="link">
+                <a href="/app/register.xhtml">Consider Registering ;)</a>
+            </div>
+
+            <div id="loginForm">
+                <h:form>
+                    <h:inputText id="username" value="#{loginRequest.username}">
+                        <f:validateLength minimum="3" maximum="15"/>
+                        <f:validateRegex pattern="^[a-z]+$"/>
+                    </h:inputText>
+
+                    <h:message for="username"/>
+
+                    <br/>
+                    <h:inputSecret value="#{loginRequest.password}"/>
+
+                    <br/>
+                    <h:commandButton value="Login" action="#{loginController.login()}"/>
+                </h:form>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</h:body>
+</html>

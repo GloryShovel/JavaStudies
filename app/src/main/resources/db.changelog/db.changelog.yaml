@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20191021_init
+      author: Paweł Janowiak
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20191021_init.sql
+
+  - changeSet:
+      id: 20191121_zadanie4
+      author: Paweł Janowiak
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20191121_zadanie4.sql
