@@ -19,7 +19,7 @@ public class BranchRepository {
         return Optional.ofNullable(branch);
     }
 
-    public List findBranchByName(String name){
+    public List<Branch> findBranchByName(String name){
         return em.createQuery("from Branch where name like :name", Branch.class)
                 .setParameter("name", name)
                 .getResultList();
@@ -34,7 +34,7 @@ public class BranchRepository {
         }
     }
 
-    public List findAll(){
+    public List<Branch> findAll(){
         return em.createQuery("from Branch", Branch.class).getResultList();
     }
 

@@ -21,15 +21,15 @@ public class CategoryRepository {
 
     //Here is tricky because searching by name needs branchId and that is
     //because different branch can have the same category
-    public List findCategoryByName(Long branchId, String name){
-        return em.createQuery("from Category where branch.id = :branchId and  name = :name")
+    public List<Category> findCategoryByName(Long branchId, String name){
+        return em.createQuery("from Category where branch.id = :branchId and  name = :name", Category.class)
                 .setParameter("branchId", branchId)
                 .setParameter("name", name)
                 .getResultList();
     }
 
-    public List findCategoryByBranch(Long branchId){
-        return em.createQuery("from Category where branch.id = :branchId")
+    public List<Category> findCategoryByBranch(Long branchId){
+        return em.createQuery("from Category where branch.id = :branchId", Category.class)
                 .setParameter("branchId", branchId)
                 .getResultList();
     }
@@ -43,7 +43,7 @@ public class CategoryRepository {
         }
     }
 
-    public List findAll(){
+    public List<Category> findAll(){
         return em.createQuery("from Category", Category.class).getResultList();
     }
 

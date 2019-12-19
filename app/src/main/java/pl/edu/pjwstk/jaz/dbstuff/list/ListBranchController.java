@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.jaz.dbstuff.list;
 
+import pl.edu.pjwstk.jaz.dbstuff.Branch;
 import pl.edu.pjwstk.jaz.dbstuff.BranchRepository;
 
 import javax.enterprise.context.RequestScoped;
@@ -14,5 +15,5 @@ public class ListBranchController {
     @Inject
     private BranchRepository branchRepository;
 
-    public List getBranchList(){ return branchRepository.findAll();}
+    public List<Branch> getBranchList(){ return branchRepository.findAll();}
 }

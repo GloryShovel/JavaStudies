@@ -17,38 +17,75 @@
                                styleClass="alert alert-danger" value="#{flash['error-message']}"/>
                 <h:form styleClass="form-base">
 
-                    <div class="form-group">
-                        <h:outputText value="Wybierz dzial"/><br/>
-                        <h:selectOneMenu id="branch-name" styleClass="form-control" a:placeholder="Branch name"
-                                         value="#{editAuctionController.addRequest.branchId}"
-                                         onchange="submit()"
-                                         valueChangeListener="#{editAuctionController.addRequest.branchIdChange}">
-                            <f:selectItems value="#{listBranchController.branchList}" var="branch"
-                                           itemValue="#{branch.id}" itemLabel="#{branch.name}"/>
-                        </h:selectOneMenu>
-                        <br/>
-                        <h:outputText value="Wybierz kategorie"/><br/>
-                        <h:selectOneMenu id="category-name" styleClass="form-control" a:placeholder="Category name"
-                                         value="#{editAuctionController.addRequest.categoryId}">
-                            <f:selectItems value="#{listCategoryController.getCategoriesOfBranch(editAuctionController.addRequest.branchId)}"
-                                           var="category"
-                                           itemValue="#{category.id}" itemLabel="#{category.name}"/>
-                        </h:selectOneMenu>
-                    </div><br/>
+<!--                    TODO: wywal valueChangeListener oraz przestaw listCategory na editAuction-->
 
+<!--                    <div class="form-group">-->
+<!--                        <h:outputText value="Wybierz dzial"/><br/>-->
+<!--                        <h:selectOneMenu id="branch-name" styleClass="form-control" a:placeholder="Branch name"-->
+<!--                                         value="#{editAuctionController.addRequest.branchId}"-->
+<!--                                         onchange="submit()">-->
+<!--                            <f:selectItems var="empty" itemValue="-1" itemLabel="&#45;&#45;&#45;&#45;"/>-->
+<!--                            <f:selectItems value="#{listBranchController.branchList}" var="branch"-->
+<!--                                           itemValue="#{branch.id}" itemLabel="#{branch.name}"/>-->
+<!--                        </h:selectOneMenu>-->
+<!--                        <br/>-->
+<!--                        -->
+<!--                        <h:outputText value="Wybierz kategorie"/><br/>-->
+<!--                        <h:selectOneMenu id="category-name" styleClass="form-control" a:placeholder="Category name"-->
+<!--                                         value="#{editAuctionController.addRequest.categoryId}">-->
+<!--                            <f:selectItems value="#{editAuctionController.addRequest.categoryOptions}"-->
+<!--                                           var="category"-->
+<!--                                           itemValue="#{category.id}" itemLabel="#{category.name}"/>-->
+<!--                        </h:selectOneMenu>-->
+<!--                    </div><br/>-->
+
+<!--                    TODO: jezeli nie zadziala na dzisiejszych zajeciach to zrob sztywna liste categorii                   -->
+                    <h:outputText value="Wybierz kategorie"/><br/>
+                    <h:selectOneMenu id="category-name" styleClass="form-control" a:placeholder="Category name"
+                                     value="#{editAuctionController.addRequest.categoryId}">
+                        <f:selectItems value="#{listCategoryController.categoryList}"
+                                       var="category"
+                                       itemValue="#{category.id}" itemLabel="#{category.name}"/>
+                    </h:selectOneMenu><br/>
 
                     <h:outputText value="Zdjecia"/><br/>
                     <div class="form-group">
-                        <h:inputText id="auction-photos" styleClass="form-control" a:placeholder="Auction photos"
-                                     value="#{editAuctionController.addRequest.tempPhoto}"/>
+                        <h:inputText id="auction-photo0" styleClass="form-control" a:placeholder="Auction photos"
+                                     value="#{editAuctionController.addRequest.tempPhoto0}"/>
+                        <br/>
+                        <h:inputText id="auction-photo1" styleClass="form-control" a:placeholder="Auction photos"
+                                     value="#{editAuctionController.addRequest.tempPhoto1}"/>
+                        <br/>
+                        <h:inputText id="auction-photo2" styleClass="form-control" a:placeholder="Auction photos"
+                                     value="#{editAuctionController.addRequest.tempPhoto2}"/>
+                        <br/>
+                        <h:inputText id="auction-photo3" styleClass="form-control" a:placeholder="Auction photos"
+                                     value="#{editAuctionController.addRequest.tempPhoto3}"/>
+                        <br/>
                     </div><br/>
 
                     <div class="form-group">
                         <h:outputText value="Parametry"/><br/>
-                            <h:inputText id="auction-params" styleClass="form-control" a:placeholder="Auction params"
-                                         value="#{editAuctionController.addRequest.tempParam}"/>
-                            <h:inputText id="auction-properties-value" styleClass="form-control" a:placeholder="Auction params value"
-                                         value="#{editAuctionController.addRequest.tempParamValue}"/>
+                        <h:inputText id="auction-param0" styleClass="form-control" a:placeholder="Auction params"
+                                     value="#{editAuctionController.addRequest.tempParam0}"/>
+                        <h:inputText id="auction-properties-value0" styleClass="form-control" a:placeholder="Auction params value"
+                                     value="#{editAuctionController.addRequest.tempParamValue0}"/>
+                        <br/>
+                        <h:inputText id="auction-param1" styleClass="form-control" a:placeholder="Auction params"
+                                     value="#{editAuctionController.addRequest.tempParam1}"/>
+                        <h:inputText id="auction-properties-value1" styleClass="form-control" a:placeholder="Auction params value"
+                                     value="#{editAuctionController.addRequest.tempParamValue1}"/>
+                        <br/>
+                        <h:inputText id="auction-param2" styleClass="form-control" a:placeholder="Auction params"
+                                     value="#{editAuctionController.addRequest.tempParam2}"/>
+                        <h:inputText id="auction-properties-value2" styleClass="form-control" a:placeholder="Auction params value"
+                                     value="#{editAuctionController.addRequest.tempParamValue2}"/>
+                        <br/>
+                        <h:inputText id="auction-param3" styleClass="form-control" a:placeholder="Auction params"
+                                     value="#{editAuctionController.addRequest.tempParam3}"/>
+                        <h:inputText id="auction-properties-value3" styleClass="form-control" a:placeholder="Auction params value"
+                                     value="#{editAuctionController.addRequest.tempParamValue3}"/>
+                        <br/>
                     </div><br/>
 
                     <div class="form-group">

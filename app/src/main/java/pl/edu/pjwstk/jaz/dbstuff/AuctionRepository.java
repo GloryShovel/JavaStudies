@@ -20,7 +20,7 @@ public class AuctionRepository {
     }
 
     //Two or more different categories can have same auction
-    public List findAuctionByTitle(Long categoryId, String tile){
+    public List<Auction> findAuctionByTitle(Long categoryId, String tile){
         return em.createQuery("from Auction where category.id = :categoryId and title like :tile", Auction.class)
                 .setParameter("categoryId", categoryId)
                 .setParameter("tile", tile)
@@ -36,7 +36,7 @@ public class AuctionRepository {
         }
     }
 
-    public List findAll(){
+    public List<Auction> findAll(){
         return em.createQuery("from Auction ", Auction.class).getResultList();
     }
 

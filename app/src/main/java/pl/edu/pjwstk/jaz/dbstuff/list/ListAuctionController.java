@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.jaz.dbstuff.list;
 
+import pl.edu.pjwstk.jaz.dbstuff.Auction;
 import pl.edu.pjwstk.jaz.dbstuff.AuctionRepository;
 import pl.edu.pjwstk.jaz.dbstuff.BranchRepository;
 
@@ -15,5 +16,5 @@ public class ListAuctionController {
     @Inject
     private AuctionRepository auctionRepository;
 
-    public List getAuctionList(){ return auctionRepository.findAll();}
+    public List<Auction> getAuctionList(){ return auctionRepository.findAll();}
 }

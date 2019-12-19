@@ -16,8 +16,8 @@ public class ListCategoryController {
     @Inject
     private CategoryRepository categoryRepository;
 
-    public List getCategoryList(){ return categoryRepository.findAll();}
+    public List<Category> getCategoryList(){ return categoryRepository.findAll();}
 
 
-    public List getCategoriesOfBranch(Long branchId){return  categoryRepository.findCategoryByBranch(branchId);}
+    public List<Category> getCategoriesOfBranch(Long branchId){return  categoryRepository.findCategoryByBranch(branchId);}
 }

@@ -8,21 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
-public class UserRepository {
+public class PhotosRepository {
     @PersistenceContext
     EntityManager em;
 
     //I didn't commented anything here, because everything is easy to understand
 
-    public Optional<User> findUserById(Long id){
-        var user = em.find(User.class, id);
-        return Optional.ofNullable(user);
-    }
-
-    public List<User> findUserByName(String name){
-        return em.createQuery("from User where name = :name", User.class)
-                .setParameter("name", name)
-                .getResultList();
+    public Optional<Photos> findPhotoById(Long id){
+        var photo = em.find(Photos.class, id);
+        return Optional.ofNullable(photo);
     }
 
     @Transactional
@@ -34,8 +28,8 @@ public class UserRepository {
         }
     }
 
-    public List<User> findAll(){
-        return em.createQuery("from User", User.class).getResultList();
+    public List<Photos> findAll(){
+        return em.createQuery("from Photos ", Photos.class).getResultList();
     }
 
 }
