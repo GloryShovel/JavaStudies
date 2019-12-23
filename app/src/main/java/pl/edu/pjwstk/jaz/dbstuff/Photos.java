@@ -42,4 +42,16 @@ public class Photos {
     public String getLink() {
         return link;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 }

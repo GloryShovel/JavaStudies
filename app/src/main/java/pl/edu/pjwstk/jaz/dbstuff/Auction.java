@@ -43,7 +43,13 @@ public class Auction {
         this.category = category;
         this.owner = owner;
         this.photos = photos;
+        for (Photos photo: photos) {
+            photo.setAuction(this);
+        }
         this.params = params;
+        for (Linker_auction_params param: params) {
+            param.setAuction(this);
+        }
 
         this.title = title;
         this.description = description;

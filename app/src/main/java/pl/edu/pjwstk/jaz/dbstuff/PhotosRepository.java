@@ -20,11 +20,11 @@ public class PhotosRepository {
     }
 
     @Transactional
-    public void save(User user) {
-        if (user.getId() == null) {
-            em.persist(user);
+    public void save(Photos photo) {
+        if (photo.getId() == null) {
+            em.persist(photo);
         } else {
-            em.merge(user);
+            em.merge(photo);
         }
     }
 

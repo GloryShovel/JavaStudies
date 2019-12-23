@@ -14,7 +14,7 @@ public class Linker_auction_params implements Serializable {
     private Auction auction;
 
     @Id
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "parameter_id")
     private Parameters param;
 
@@ -35,15 +35,30 @@ public class Linker_auction_params implements Serializable {
         this.value = value;
     }
 
-    //Getters
+    //Getters/Setters
     //**************************************************************************************************
 
     public Auction getAuction() {
         return auction;
     }
 
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
+
     public Parameters getParam() {
         return param;
     }
-    public String getValue(){return value;}
+
+    public void setParam(Parameters param) {
+        this.param = param;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

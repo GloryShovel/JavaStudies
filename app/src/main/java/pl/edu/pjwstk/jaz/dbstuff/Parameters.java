@@ -29,4 +29,12 @@ public class Parameters {
     public String getParam() {
         return param;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
 }

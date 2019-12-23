@@ -19,6 +19,12 @@ public class UserRepository {
         return Optional.ofNullable(user);
     }
 
+    public List<User> findUserByLogin(String login){
+        return em.createQuery("from User where login = :login", User.class)
+                .setParameter("login", login)
+                .getResultList();
+    }
+
     public List<User> findUserByName(String name){
         return em.createQuery("from User where name = :name", User.class)
                 .setParameter("name", name)
