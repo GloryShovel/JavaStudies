@@ -20,7 +20,7 @@ public class Auction {
     private User owner;
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy = "auction")
-    @OrderColumn(name = "order")
+//  FIXME  @OrderColumn(name = "order")
     private List<Photos> photos;
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy = "auction")

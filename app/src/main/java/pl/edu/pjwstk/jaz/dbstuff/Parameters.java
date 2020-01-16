@@ -9,14 +9,14 @@ public class Parameters {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String param;
+    private String name;
 
     public Parameters(){
 
     }
 
-    public Parameters(String param){
-        this.param = param;
+    public Parameters(String name){
+        this.name = name;
     }
 
     //Getters
@@ -26,15 +26,15 @@ public class Parameters {
         return id;
     }
 
-    public String getParam() {
-        return param;
+    public String getName() {
+        return name;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setParam(String param) {
-        this.param = param;
+    public void setName(String param) {
+        this.name = param;
     }
 }

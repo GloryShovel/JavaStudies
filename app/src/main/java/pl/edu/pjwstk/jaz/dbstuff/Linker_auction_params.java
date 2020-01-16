@@ -8,12 +8,15 @@ import java.io.Serializable;
 public class Linker_auction_params implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @EmbeddedId
+    private AuctionParameterId auctionParameterId = new AuctionParameterId();
+
+    @MapsId("auctionId")
     @ManyToOne(optional = false)
     @JoinColumn(name = "auction_id")
     private Auction auction;
 
-    @Id
+    @MapsId("parameterId")
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "parameter_id")
     private Parameters param;
@@ -60,5 +63,13 @@ public class Linker_auction_params implements Serializable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public AuctionParameterId getAuctionParameterId() {
+        return auctionParameterId;
+    }
+
+    public void setAuctionParameterId(AuctionParameterId auctionParameterId) {
+        this.auctionParameterId = auctionParameterId;
     }
 }

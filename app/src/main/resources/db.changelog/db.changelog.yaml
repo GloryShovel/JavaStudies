@@ -14,3 +14,11 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20191121_zadanie4.sql
+
+  - changeSet:
+      id: 20200116_drop_wrong_column
+      author: Paweł Janowiak
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200116_drop_wrong_column.sql
