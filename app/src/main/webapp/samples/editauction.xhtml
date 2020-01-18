@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="../templates/Layout.xhtml">
+        <ui:param name="title" value="Edit branch"/>
+
+        <ui:define name="content">
+            <div class="text-center">
+                <h:outputLabel rendered="#{flash.containsKey('error-message')}"
+                               styleClass="alert alert-danger" value="#{flash['error-message']}"/>
+                <h:form styleClass="form-base">
+                    <h:inputHidden value="#{editAuctionController.editRequest.id}" />
+
+                    <h:outputText value="Wybierz kategorie"/><br/>
+                    <h:selectOneMenu id="category-name" styleClass="form-control" a:placeholder="Category name"
+                                     value="#{editAuctionController.editRequest.categoryId}">
+                        <f:selectItems value="#{listCategoryController.categoryList}"
+                                       var="category"
+                                       itemValue="#{category.id}" itemLabel="#{category.name}"/>
+                    </h:selectOneMenu><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Zdjecia"/><br/>
+                        <ui:repeat value="#{editAuctionController.editRequest.photos}" var="photos">
+                            <h:inputText value="#{photos.link}"/>
+                            <br/>
+                        </ui:repeat>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Parametry"/><br/>
+                        <ui:repeat value="#{editAuctionController.editRequest.params}" var="params">
+                            <h:inputText value="#{params.param.name}"/>
+                            <h:inputText value="#{params.value}"/>
+                            <br/>
+                        </ui:repeat>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Tytul"/><br/>
+                        <h:inputText id="auction-title" styleClass="form-control" a:placeholder="Auction title"
+                                     value="#{editAuctionController.editRequest.title}"/>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Opis"/><br/>
+                        <h:inputText id="auction-description" styleClass="form-control" a:placeholder="Auction description"
+                                     value="#{editAuctionController.editRequest.description}"/>
+                    </div><br/>
+
+                    <div class="form-group">
+                        <h:outputText value="Cena"/><br/>
+                        <h:inputText id="auction-price" styleClass="form-control" a:placeholder="Auction price"
+                                     value="#{editAuctionController.editRequest.price}"/>
+                    </div><br/>
+
+                    <h:commandButton styleClass="btn btn-primary" value="Save" action="#{editAuctionController.edit}"/><br/>
+                </h:form>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html>

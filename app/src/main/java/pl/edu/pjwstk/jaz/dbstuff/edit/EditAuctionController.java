@@ -29,43 +29,48 @@ public class EditAuctionController implements Serializable {
     @Inject
     private ParamRetriever paramRetriever;
 
-    private EditAuctionRequest editAuctionRequest;
-
     private EditAuctionModel editAuctionModel;
 
     //EDIT
     //**************************************************************************************************
-//    public EditAuctionRequest getEditRequest() {
-//        if (editAuctionRequest == null) {
-//            editAuctionRequest = createEditAuctionRequest();
-//        }
-//        return editAuctionRequest;
-//    }
-//
-//    private EditAuctionRequest createEditAuctionRequest() {
-//        if (paramRetriever.contains("auctionId")) {
-//            var auctionId = paramRetriever.getLong("auctionId");
-//            var auction = auctionRepository.findAuctionById(auctionId).orElseThrow();
-//            return new EditAuctionRequest(auction);
-//        }
-//        return new EditAuctionRequest();
-//    }
-//
-//    public String save() {
-//        Long branchId = getEditRequest().getBranchId();
-//        String name = getEditRequest().getName();
-//        var branch = auctionRepository.findAuctionById(branchId).orElseThrow();
-//
-//        //check if branch contains this category
-//        if(categoryRepository.findCategoryByName(branchId, name).isEmpty()) {
-//            Category category = new Category(editCategoryRequest.getId(), branch, editCategoryRequest.getName());
-//            categoryRepository.save(category);
-//        }else{
-//            System.out.println("Nie udalo sie zedytowac kategorii");
-//        }
-//
-//        return "/samples/categoryList.xhtml?faces-redirect=true";
-//    }
+    public EditAuctionModel getEditRequest() {
+        if (editAuctionModel == null) {
+            editAuctionModel = createEditAuctionModel();
+        }
+        return editAuctionModel;
+    }
+
+    private EditAuctionModel createEditAuctionModel() {
+        if (paramRetriever.contains("auctionId")) {
+            var auctionId = paramRetriever.getLong("auctionId");
+            var auction = auctionRepository.findAuctionById(auctionId).orElseThrow();
+            return new EditAuctionModel(auction);
+        }
+        return new EditAuctionModel();
+    }
+
+    public String edit() {
+        Long categoryId = getEditRequest().getCategoryId();
+        Long ownerId = getEditRequest().getOwnerId();
+
+        //Making photo list
+        List<Photos> photoList = getEditRequest().getPhotos();
+
+        //Making list for linker between auction and parameters
+        List<Linker_auction_params> params = getEditRequest().getParams();
+
+        String description = getEditRequest().getDescription();
+        String title = getEditRequest().getTitle();
+        float price = getEditRequest().getPrice();
+
+        //passing mergeable object
+        Category category = categoryRepository.findCategoryById(categoryId).orElseThrow();
+        User owner = userRepository.findUserById(ownerId).orElseThrow();
+        Auction auction = new Auction(getEditRequest().getId(), category, owner, photoList, params, title, description, price);
+        auctionRepository.save(auction);
+
+        return "/samples/myAuctionList.xhtml?faces-redirect=true";
+    }
 
     //ADD
     //**************************************************************************************************

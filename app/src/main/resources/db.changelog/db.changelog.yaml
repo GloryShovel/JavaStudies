@@ -9,7 +9,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 20191121_zadanie4
-      author: Paweł Janowiak
+      author: Kamil Skrzypkowski
       sqlFile:
         relativeToChangelogFile: true
         splitStatements: false
@@ -22,3 +22,11 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20200116_drop_wrong_column.sql
+
+  - changeSet:
+      id: 20200117_alter_init
+      author: Kamil Skrzypkowski
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200117_alter_init.sql

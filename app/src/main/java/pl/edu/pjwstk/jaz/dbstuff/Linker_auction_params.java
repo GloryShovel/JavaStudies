@@ -17,7 +17,7 @@ public class Linker_auction_params implements Serializable {
     private Auction auction;
 
     @MapsId("parameterId")
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "parameter_id")
     private Parameters param;
 
@@ -33,6 +33,8 @@ public class Linker_auction_params implements Serializable {
     }
 
     public Linker_auction_params(Auction auction, Parameters param, String value){
+        this.auctionParameterId.setAuctionId(auction.getId());
+        this.auctionParameterId.setParameterId(param.getId());
         this.auction = auction;
         this.param = param;
         this.value = value;

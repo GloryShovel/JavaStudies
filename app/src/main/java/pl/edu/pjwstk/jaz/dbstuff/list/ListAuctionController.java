@@ -17,4 +17,5 @@ public class ListAuctionController {
     private AuctionRepository auctionRepository;
 
     public List<Auction> getAuctionList(){ return auctionRepository.findAll();}
+    public List<Auction> getMyAuctionList(){ return auctionRepository.findAuctionByOwner();}
 }

@@ -18,22 +18,21 @@
         <ui:define name="content">
 
             <div class="link">
-                <a href="/app/indexadmin.xhtml">Back</a>
-            </div>
+                <a href="/app/index.xhtml">Back</a>
             <br/>
-            <div class="link">
-                <a href="/app/samples/addbranch.xhtml">Add new branch</a>
+                <a href="/app/samples/addauction.xhtml">Create new auction</a>
             </div>
 
             <div class="list-group">
                 <h4>Click to edit</h4>
-                <ui:repeat value="#{listBranchController.branchList}" var="branch">
-                    <h:link styleClass="list-group-item list-group-item-action" outcome="editbranch">
-                        <f:param name="branchId" value="#{branch.id}"/>
+                <ui:repeat value="#{listAuctionController.myAuctionList}" var="auction">
 
-                        <h:outputText  value="#{branch.id}_#{branch.name}"/>
-                        <br/>
+                    <h:link styleClass="list-group-item list-group-item-action" outcome="editauction">
+                        <f:param name="auctionId" value="#{auction.id}"/>
+                        <img src="#{auction.photos.get(0).link}" alt="Tu powinno byc zdjecie aukcji"/>
+                        <h:outputText  value=" #{auction.title} "/>
                     </h:link>
+                    <br/>
                 </ui:repeat>
             </div>
 

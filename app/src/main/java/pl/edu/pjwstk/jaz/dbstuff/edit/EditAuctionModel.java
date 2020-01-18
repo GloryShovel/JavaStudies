@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.jaz.dbstuff.edit;
 
+import pl.edu.pjwstk.jaz.dbstuff.Auction;
 import pl.edu.pjwstk.jaz.dbstuff.Category;
 import pl.edu.pjwstk.jaz.dbstuff.Linker_auction_params;
 import pl.edu.pjwstk.jaz.dbstuff.Photos;
@@ -8,6 +9,7 @@ import javax.faces.event.ValueChangeEvent;
 import java.util.List;
 
 public class EditAuctionModel {
+    private Long Id;
     private Long branchId;
     private Long categoryId;
     //Needed for selecting category based on branch
@@ -37,23 +39,24 @@ public class EditAuctionModel {
     public EditAuctionModel() {
     }
 
-    public EditAuctionModel(List<Category> categories){
-        this.categoryOptions = categories;
+    public EditAuctionModel(Auction auction) {
+        this.Id = auction.getId();
+        this.categoryId = auction.getCategory().getId();
+        this.ownerId = auction.getOwner().getId();
+        this.photos = auction.getPhotos();
+        this.params = auction.getParams();
+        this.title = auction.getTitle();
+        this.description = auction.getDescription();
+        this.price = auction.getPrice();
     }
 
-    public EditAuctionModel(Long branchId, Long categoryId, Long ownerId, List<Photos> photos, List<Linker_auction_params> params, String title, String description, float price) {
-        this.branchId = branchId;
-        this.categoryId = categoryId;
-        this.ownerId = ownerId;
-        this.photos = photos;
-        this.params = params;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-    }
-
-    //Branch Category Owner
+    //ID Branch Category Owner
     //********************************************************************************************************
+
+    public Long getId() { return Id; }
+
+    public void setId(Long id) { Id = id; }
+
     public Long getBranchId() {
         return branchId;
     }

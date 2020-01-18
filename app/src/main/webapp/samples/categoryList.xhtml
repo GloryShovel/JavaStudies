@@ -31,7 +31,7 @@
                     <h:link styleClass="list-group-item list-group-item-action" outcome="editcategory">
                         <f:param name="categoryId" value="#{category.id}"/>
 
-                        <h:outputText  value="##{category.id} #{category.name} #{category.branch.name}"/>
+                        <h:outputText  value="#{category.id}_#{category.branch.name}_#{category.name}"/>
                         <br/>
                     </h:link>
                 </ui:repeat>
