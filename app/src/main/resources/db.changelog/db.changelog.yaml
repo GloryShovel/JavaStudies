@@ -30,3 +30,11 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20200117_alter_init.sql
+
+  - changeSet:
+      id: 20200127_alter_photo
+      author: Kamil Skrzypkowski
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200127_alter_photo.sql

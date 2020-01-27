@@ -20,7 +20,7 @@ public class Auction {
     private User owner;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "auction")
-//  FIXME  @OrderColumn(name = "order")
+    @OrderColumn(name = "order_by")
     private List<Photos> photos;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "auction", fetch = FetchType.EAGER)

@@ -15,6 +15,9 @@ public class Photos {
 
     private String link;
 
+    @OrderBy
+    private int order_by;
+
     public Photos(){
 
     }
@@ -43,6 +46,10 @@ public class Photos {
         return link;
     }
 
+    public int getOrder_by(){ return order_by; }
+
+
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -54,4 +61,6 @@ public class Photos {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public void setOrder_by(int order_by){ this.order_by = order_by; }
 }

@@ -28,8 +28,8 @@
                 <br/>
                 <ui:repeat value="#{listAuctionController.auctionList}" var="auction">
 
-                        <img src="#{auction.photos.get(0).link}" alt="Tu powinno byc zdjecie aukcji"/>
-                        <h:outputText  value=" #{auction.title} "/>
+                        <img src="#{auction.photos.get(0).link}" alt="Tu powinno byc zdjecie aukcji: "/>
+                        <h:outputText  value=" #{auction.title}  Cena:#{auction.price}"/>
 
                     <div class="link">
                         <h:outputText value="Dodaj do koszyka" />

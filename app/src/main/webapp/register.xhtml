@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
 >
 
 <h:head>
@@ -34,7 +35,7 @@
                         <f:validateLength minimum="3" maximum="50"/>
                         <f:validateRegex pattern="^[a-zA-Z0-9]{3,50}$"/>
                     </h:inputText>
-                    <!--<h:message for="Imie"/>-->
+                    <br/>
 
                     <br/>
 
@@ -43,6 +44,7 @@
                         <f:validateLength minimum="3" maximum="50"/>
                         <f:validateRegex pattern="^[a-zA-Z0-9]{3,50}$"/>
                     </h:inputText>
+                    <br/>
 
                     <br/>
                     Nazwa Uzytkownika:<br/>
@@ -51,7 +53,11 @@
                         <f:validateRegex pattern="^[a-z0-9]{3,50}$"/>
                     </h:inputText>
                     <br/>
+                    <c:if test="#{flash.containsKey('already-exists')}">
+                    <small class="form-text text-danger"><h:outputText value="#{flash['already-exists']}"/></small>
+                    </c:if>
 
+                    <br/>
                     Haslo:<br/>
                     <h:inputSecret id="password" value="#{register.password}">
                         <f:validateLength minimum="5" maximum="30"/>
@@ -59,6 +65,7 @@
                     </h:inputSecret>
                     <br/>
 
+                    <br/>
                     E-mail:<br/>
                     <h:inputText id="e_mail" value="#{register.email}">
                         <f:validateLength minimum="3" maximum="50"/>
@@ -66,11 +73,13 @@
                     </h:inputText>
                     <br/>
 
+                    <br/>
                     Data urodzenia:<br/>
                     <h:inputText id="data_urodzenia" value="#{register.birthday}">
                         <f:validateLength minimum="3" maximum="50"/>
                         <f:validateRegex pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$"/>
                     </h:inputText>
+                    <br/>
 
                     <br/>
                     <h:commandButton value="Register" action="#{(register.register)}"/>

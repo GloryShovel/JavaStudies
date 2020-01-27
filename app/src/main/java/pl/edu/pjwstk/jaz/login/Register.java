@@ -4,10 +4,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.edu.pjwstk.jaz.dbstuff.User;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 
 @Named
 @ApplicationScoped
@@ -40,7 +42,7 @@ public class Register {
 
         //Mapping DB for login check
         final User login = entityManager.find(User.class, 7L);
-        var list = entityManager.createQuery("from User where login = :login", User.class)
+        List<User> list = entityManager.createQuery("from User where login = :login", User.class)
                 .setParameter("login", getUsername())
                 .getResultList();
 
@@ -53,7 +55,8 @@ public class Register {
             entityManager.persist(user);
             return "/login.xhtml";
         }else{
-            return "/register.xhtml";
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("already-exists","Nazwa uzytkownika jest zajeta");
+            return "register.xhtml?faces-redirect=true";
         }
     }
 
